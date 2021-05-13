@@ -43,11 +43,37 @@ a:link, a:visited {
   }
 
   a.trybe:link, a.trybe:visited  {
-    color: #2fc18c;
+    color: #29ac7c;
     text-decoration:none;
   }
 
   a.trybe:hover, a.trybe:active {
     color: #046b53;
     text-decoration:underline;
+  }
+
+  strong {
+    font-style: italic;
+  }
+
+  .java{
+    font-size: 30px;
+  }
+  .html{
+    font-size: 28px;
+  }
+  .css{
+    font-size: 26px;
+  }
+  .react{
+    font-size: 24px;
+  }
+  .node{
+    font-size: 22px;
+  }
+  .express{
+    font-size: 20px;
+  }
+  .outras{
+    font-size: 18px;
   }
