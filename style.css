@@ -1,15 +1,27 @@
+@font-face {
+    font-family: 'Satisfy-Regular';
+    src: url('Satisfy-Regular.ttf');
+    src: url('Satisfy-Regular.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
 body {
     background-color: rgb(209, 197, 181);
     color: rgb(83, 75, 65);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
-    font-size: 50px;
+    font-size: 70px;
     color: rgb(51, 50, 50);
     text-align: center;
-    margin-bottom: 30px;
-    margin-top: 50px;
+    margin: 0;
+    padding-bottom: 20px;
+    padding-top: 40px;
+    font-family: Satisfy-Regular;
 }
 
 h2 {
@@ -19,61 +31,76 @@ h2 {
 
 
 .photo_perfil {
-    border-radius: 50%;
+    border-radius: 60px;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-.blocktext {
-    margin: 100px;
-}
-
-.habilidades {
+.blocktext, .habilidades {
     margin: 100px;
 }
 
 a:link, a:visited {
     color: rgb(83, 75, 65);
     text-decoration:none;
-  }
-  a:hover, a:active {
+}
+a:hover, a:active {
     color: rgb(126, 118, 109);
     text-decoration:underline;
-  }
+}
 
-  a.trybe:link, a.trybe:visited  {
+a.trybe:link, a.trybe:visited  {
     color: #29ac7c;
     text-decoration:none;
-  }
+}
 
-  a.trybe:hover, a.trybe:active {
+a.trybe:hover, a.trybe:active {
     color: #046b53;
     text-decoration:underline;
-  }
+}
 
-  strong {
+strong {
     font-style: italic;
-  }
+}
 
-  .java{
+.java{
     font-size: 30px;
-  }
-  .html{
+}
+.html{
     font-size: 28px;
-  }
-  .css{
+}
+.css{
     font-size: 26px;
-  }
-  .react{
+}
+.react{
     font-size: 24px;
-  }
-  .node{
+}
+.node{
     font-size: 22px;
-  }
-  .express{
+}
+.express{
     font-size: 20px;
-  }
-  .outras{
+}
+.outras{
     font-size: 18px;
-  }
+}
+
+.container-menu {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid rgb(161, 148, 130);
+    border-bottom: 1px solid rgb(214, 204, 189);
+    flex-basis: auto;
+}
+
+.itens-menu {
+    padding: 15px 10%;
+}
+
+.container-perfil{
+    display: flex;
+    padding: 30px;
+}
+
+.perfil {
+    text-align: center;
+}
