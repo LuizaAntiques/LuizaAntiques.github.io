@@ -8,8 +8,9 @@
 /*  CODIGO MOBILE FIRST */
 
 body {
-  display: flex;
+  display: none;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 @font-face {
@@ -201,7 +202,7 @@ h3 {
 }
 
 .myphotos:hover {
-  transform: scale(1.6);
+  transform: scale(2);
   z-index: 1;
 }
 
@@ -553,6 +554,10 @@ footer {
     box-shadow: 0px 1px 8px 1.5px rgba(44, 44, 44, 0.5);
     margin: 1vh;
     width: 21vh;
+  }
+
+  .myphotos:hover {
+    transform: scale(1.7);
   }
 
   .photo-column {

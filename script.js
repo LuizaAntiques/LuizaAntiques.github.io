@@ -39,6 +39,13 @@ for(let i = 0; i < anchor.length; i += 1) {
     }
   });
 }
+const body = document.querySelector('body');
+
+function fixFade() {
+  setTimeout(() => {
+    body.style.display = 'flex';
+  }, 100);
+}
 
 function addFade() {
   const home = document.querySelector('#home');
@@ -55,5 +62,6 @@ menuIcon.addEventListener('click', () => {
 
 window.onload = function() {
   setTimeout(type, 2500);
+  fixFade();
   addFade();
 };
