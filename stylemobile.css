@@ -47,15 +47,16 @@ body {
 
 header {
   animation: growth 1s;
+  backface-visibility: hidden;
   background-color: black;
   display: flex;
   height: 48px;
   justify-content: space-between;
   left: 0;
-  padding: 1vw 0 0 2vw;
+  padding: 1vw ;
   position: fixed;
   top: 0;
-  width: 100vw;
+  width: 100%;
   z-index: 1;
 }
 
@@ -115,7 +116,7 @@ a:hover {
   justify-content: center;
   position: relative;
   top: 50vh;
-  width: 100vw;
+  width: 100%;
 }
 
 .img-cover {
@@ -291,7 +292,7 @@ ul {
 
 .social {
   height: 46%;
-  margin: 0 50px;
+  padding: 0 2vw;
   width: 100%;
 }
 
@@ -407,7 +408,7 @@ footer {
   opacity: 1;
 }
 
-@media screen and (min-width: 790px) {
+@media screen and (min-width: 770px) {
 
   body {
     overflow-x: scroll;
