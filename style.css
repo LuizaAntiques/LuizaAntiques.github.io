@@ -75,6 +75,15 @@ header {
   opacity: 0.9;
 }
 
+.menu {
+  display: flex;
+}
+
+.button-menu {
+  height: 48px;
+  display: none;
+}
+
 a {
   color: white;
   margin-right: 10px;
@@ -162,7 +171,6 @@ a:focus {
   flex-direction: column;
   height: 100%;
   padding: 48px 50px 0;
-  top: 0;
   width: 100vw;
   z-index: 0;
 }
@@ -416,4 +424,76 @@ footer {
 .fade {
   animation: fadeIn 2.6s;
   opacity: 1;
+}
+
+@media screen and (max-width: 800px) {
+
+  body {
+    overflow: hidden;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  /* header */
+
+  header {
+    display: flex;
+    height: 48px;
+    justify-content: space-between;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    position:relative;
+  }
+
+  .button-menu {
+    background: none;
+    border: none;
+    display: block;
+    margin-right: 2vw;
+    right: 0;
+    width: 50px;
+  }
+
+  .button-menu img {
+    height: 30px;
+  }
+
+  .button-menu:hover img {
+    opacity: 0.85;
+  }
+
+  .button-menu:hover {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  nav {
+    display: none;
+    background-color: gray;
+    min-width: 200px;
+    position: relative;
+    top: 48px;
+  }
+
+  nav a {
+    padding: 10px;
+    display: block;
+  }
+
+  .menu:hover nav {
+    display: block;
+    width: 9vw;
+
+  }
+
 }
