@@ -4,6 +4,7 @@ const main = document.querySelector('main');
 const anchor = document.getElementsByClassName('button');
 const menuIcon = document.querySelector('.button-menu');
 const navBar = document.querySelector('nav');
+const body = document.querySelector('body');
 let index = 0;
 
 function type() {
@@ -16,13 +17,15 @@ function type() {
 
 for(let i = 0; i < anchor.length; i += 1) {
   anchor[i].addEventListener('click', (e) => {
+
+    if (window.screen.width < 790) {
+      console.log(navBar.style.display)
+      navBar.style.display = 'none';
+    }
+
     for (let a = 0; a < anchor.length; a += 1) {
       const href = anchor[a].getAttribute('href');
       const elements = document.querySelector(href);
-
-      if (!menuIcon.style.display === 'none') {
-        navBar.style.display = 'none';
-      }
 
       if (elements.classList.contains('fade')) {
         elements.classList.remove('fade');
@@ -39,7 +42,6 @@ for(let i = 0; i < anchor.length; i += 1) {
     }
   });
 }
-const body = document.querySelector('body');
 
 function fixFade() {
   setTimeout(() => {

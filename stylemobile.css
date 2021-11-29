@@ -10,7 +10,7 @@
 body {
   display: none;
   flex-direction: column;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 @font-face {
@@ -98,11 +98,11 @@ a:hover {
 }
 
 .button-menu {
-  width: 30px;
+  left: 92vw;
   margin-top: 1vw;
   position: fixed;
   top: 4px;
-  left: 92vw;
+  width: 30px;
 }
 
 /* home */
@@ -165,6 +165,9 @@ a:hover {
 #about {
   margin-top: 60vh;
   padding-top: 50px;
+}
+
+.main-about {
   padding-left: 2vw;
 }
 
@@ -211,7 +214,7 @@ h3 {
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   width: 100%;
 }
 
@@ -408,7 +411,7 @@ footer {
   opacity: 1;
 }
 
-@media screen and (min-width: 770px) {
+@media screen and (min-width: 790px) {
 
   body {
     overflow-x: scroll;
@@ -531,6 +534,10 @@ footer {
     margin: 0;
     width: 100vw;
     z-index: 0;
+  }
+
+  .main-about {
+    padding: 0;
   }
 
   h1 {
