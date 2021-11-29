@@ -10,7 +10,8 @@
 body {
   display: none;
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 @font-face {
