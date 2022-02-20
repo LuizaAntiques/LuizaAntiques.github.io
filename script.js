@@ -62,8 +62,21 @@ menuIcon.addEventListener('click', () => {
   }
 });
 
+// function sendEmail() {
+//   document.getElementById('send').addEventListener('click', (event) => {
+//     event.preventDefault();
+//     emailjs.sendForm('contact_portfolio', 'contact_form', form.current)
+//       .then(function() {
+//         console.log('SUCCESS!');
+//       }, function(error) {
+//         console.log('FAILED...', error);
+//       });
+//   });
+// }
+
 window.onload = function() {
   setTimeout(type, 2500);
   fixFade();
   addFade();
+  // sendEmail();
 };

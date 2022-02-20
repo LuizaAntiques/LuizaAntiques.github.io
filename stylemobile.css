@@ -11,7 +11,7 @@ body {
   display: none;
   flex-direction: column;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 @font-face {
@@ -188,7 +188,7 @@ h3 {
 .description {
   color: rgb(29, 29, 29);
   font-size: 3.5vw;
-  margin: 3vh 15vw;
+  margin: 3vh 8vw;
   width: 70vw;
 }
 
@@ -408,7 +408,7 @@ footer {
 }
 
 .fade {
-  animation: fadeIn 2.6s;
+  animation: fadeIn 1.5s;
   opacity: 1;
 }
 
@@ -551,7 +551,8 @@ footer {
   }
 
   .description {
-    font-size: 1.18vw;
+    font-size: 0.9vw;
+    text-align: justify;
   }
 
   .photos {
@@ -593,6 +594,15 @@ footer {
 
   ul {
     font-size: 1.1vw;
+  }
+
+  .trybe {
+    color: #036B52;
+    font-weight: bold;
+  }
+
+  .trybe:hover {
+    color: #2FC18C;
   }
 
   /* skills */

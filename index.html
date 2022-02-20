@@ -4,9 +4,29 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-        <link rel="stylesheet" href="stylemobile.css">
+        <link rel="stylesheet" href="style.css">
         <link rel="icon" href="images/mini_logo.png">
         <title>Luiza Antiques | Dev.</title>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+        <script type="text/javascript">
+            (function() {
+                emailjs.init('user_zrvNrxQZHiorXk6AwFqay');
+            })();
+        </script>
+        <script type="text/javascript">
+            window.onload = function() {
+                document.getElementById('form').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    this.contact_number.value = Math.random() * 100000 | 0;
+                    emailjs.sendForm('contact_service', 'contact_form', this)
+                        .then(function() {
+                            console.log('SUCCESS!');
+                        }, function(error) {
+                            console.log('FAILED...', error);
+                        });
+                });
+            }
+        </script>
     </head>
     <body>
         <header>
@@ -16,10 +36,10 @@
             <div class="menu">
                 <img class="button-menu" src="images/menu.png" alt="botão menu">
                 <nav class="nav-bar">
-                    <a href="#about" class="button dropdown">ABOUT</a>
-                    <a href="#skills" class="button dropdown">SKILLS</a>
-                    <a href="#projects" class="button dropdown">PROJECTS</a>
-                    <a href="#contact" class="button dropdown">CONTACT</a>
+                    <a href="#about" class="button dropdown">SOBRE MIM</a>
+                    <a href="#skills" class="button dropdown">HABILIDADES</a>
+                    <a href="#projects" class="button dropdown">PROJETOS</a>
+                    <a href="#contact" class="button dropdown">CONTATO</a>
                 </nav>
             </div>
         </header>
@@ -38,11 +58,12 @@
             </div>
             <div id="about" class="content">
                 <div class="main-about">
-                    <h1>about.</h1>
-                    <h3>I'm a brasilian Full Stack web developer.</h3>
+                    <h1>sobre mim.</h1>
+                    <h3> Desenvolvedora web full-stack.</h3>
                     <div class="description">
-                        <p>I  worked for a few years in the education, but I never felt professionally fulfilled in this field, so in early 2021 I finally started my career transition to the field that I'm really passionate about, technology.</p>
-                        <p>I love challenges and dealing with problems that seem impossible to solve. Whem I'm not coding, you'll find me playing with my son, reading a book or trying to do some "DIY".</p>
+                        <p>Cresci em uma família de professores e atuei na área da educação por muitos anos.
+                            Com a chegada da pandemia procurei uma oportunidade de me reinventar e de me especializar em assuntos pelos quais sempre fui apaixonada. Busquei conteúdos sobre tecnologia na Internet e inicialmente estudei de forma independente, até me deparar com o curso da <a href="https://www.betrybe.com/" target="_blank" class="trybe">Trybe</a>. Assim, comecei a aprofundar meus estudos em desenvolvimento web e entendi que está sempre foi minha grande vocação.<3</p>
+                        <p>Sou movida a desafios e lidar com problemas que parecem impossíveis de serem resolvidos. Quando não estou codando você provavelmente vai me encontrar brincando com o meu filho, lendo um livro ou tentando fazer algum "DIY".</p>
                     </div>
                 </div>
                 <div class="more">
@@ -59,31 +80,31 @@
                         </div>
                     </div>
                     <div class="random-facts">
-                        <h2 class="facts-title">random facts.</h2>
+                        <h2 class="facts-title">fatos aleatórios.</h2>
                         <ul>
-                            <li class="food"> &nbspI'm addicted to coke and fast-food </li>
-                            <li class="shark"> &nbspI have selachophobia </li>
-                            <li class="games"> &nbspLove playing boardgames </li>
-                            <li class="crafts"> &nbspI really enjoy crafts </li>
-                            <li class="guitar"> &nbspI like playing the guitar and ukulele </li>
-                            <li class="harry"> &nbspMy hogwarts house is Ravenclaw </li>
+                            <li class="food"> &nbspSou viciada em refrigerante e fast-food </li>
+                            <li class="shark"> &nbspTenho selachofobia </li>
+                            <li class="games"> &nbspAmo jogar jogos de tabuleiro </li>
+                            <li class="crafts"> &nbspGosto muito de trabalhos manuais </li>
+                            <li class="guitar"> &nbspAdoro tocar violão e ukulele </li>
+                            <li class="harry"> &nbspMinha casa de Hogwarts é a Corvinal </li>
                         </ul>
                         <img class="random-img" src="images/luiza_ravenclaw.png" alt="Ravenclaw coat of arms">
                     </div>
                 </div>
             </div>
             <div id="skills" class="content">
-                <h1 class="title-skills">This area is under construction :)</h1>
-                <h3>Skills</h3>
+                <h1 class="title-skills">Área em construção :)</h1>
+                <h3>Habilidades</h3>
             </div>
             <div id="projects" class="content">
-                <h1 class="title-projects">This area is under construction :)</h1>
-                <h3>Projects</h3>
+                <h1 class="title-projects">Área em contrução :)</h1>
+                <h3>Projetos</h3>
             </div>
             <div id="contact" class="content">
                 <div class="social">
-                    <h1>contact.</h1>
-                    <h3>Contact me through these social network or send me an email.</h3>
+                    <h1>contato.</h1>
+                    <h3>Fale comigo através dessas redes sociais ou me mande um email.</h3>
                     <div class="social-links">
                         <a class="link linkedin" href="https://linkedin.com/in/luizaantiques" target="_blank">
                             <img src="images/linkedin.png" alt="link para o linkedin">
@@ -96,32 +117,33 @@
                     </div>
                 </div>
                 <div class="email-form">
-                    <form id="form" method="POST" action="mailto:luiza.antiques@gmail.com">
+                    <form id="form">
                         <div class="field-text">
                             <div class="inputs">
+                                <input type="hidden" name="contact_number">
                                 <label for="name">
-                                    Name
-                                    <input id="name" type="text" name="your-name" aria-required="true">
+                                    Nome
+                                    <input id="name" type="text" name="user_name" aria-required="true">
                                 </label>
                                 <label for="email">
-                                    Email address
-                                    <input id="email" type="text" email="your-email" aria-required="true">
+                                    Email
+                                    <input id="email" type="email" name="user_email" aria-required="true">
                                 </label>
                             </div>
                             <div class="text">
                                 <label for="message">
-                                    Message
-                                    <textarea id="message" name="your-message" cols="40" rows="10" aria-required="true"></textarea>
+                                    Mensagem
+                                    <textarea id="message" name="message" cols="40" rows="10" aria-required="true"></textarea>
                                 </label>
                             </div>
                         </div>
-                        <button type="submit" value="click" id="enviar">SEND EMAIL</button>
+                        <input id="button" type="submit" value="Enviar Email">
                     </form>
                 </div>
             </div>
         </main>
         <footer>
-            <a href='https://www.freepik.com/vectors/technology'>Technology vector created by starline - www.freepik.com</a>
+            <!-- <a href='https://www.freepik.com/vectors/technology'>Technology vector created by starline - www.freepik.com</a> -->
         </footer>
         <script type="text/javascript" src="script.js"></script>
     </body>
