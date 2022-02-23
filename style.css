@@ -235,6 +235,15 @@ ul {
   font-size: 3.5vw;
 }
 
+.trybe {
+  color: #036B52;
+  font-weight: bold;
+}
+
+.trybe:hover {
+  color: #2FC18C;
+}
+
 .food::before {
   content: url("images/fast-food.png");
 }
