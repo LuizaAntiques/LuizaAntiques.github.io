@@ -11,7 +11,7 @@ body {
   display: none;
   flex-direction: column;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: scroll;
 }
 
 @font-face {
@@ -415,6 +415,10 @@ footer {
 /*  CODIGO OUTRAS SCREENS */
 
 @media screen and (min-width: 790px) {
+
+  body {
+    overflow: hidden;
+  }
 
   main {
     display: flex;
