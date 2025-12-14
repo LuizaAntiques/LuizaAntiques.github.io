@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Rules from './components/Rules';
 import Home from './components/Home';
 import Sala from './components/Sala';
 import QuartoDoRafa from './components/QuartoDoRafa';
@@ -15,10 +16,11 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Rules />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/sala" element={<Sala />} />
           <Route path="/quarto-do-rafa" element={<QuartoDoRafa />} />
-          <Route path="/Banheiro" element={<Banheiro />} />
+          <Route path="/banheiro" element={<Banheiro />} />
           <Route path="/suite" element={<Suite />} />
           <Route path="/escritorio" element={<Escritorio />} />
           <Route path="/cozinha" element={<Cozinha />} />

@@ -1,7 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './PuzzleRoom.css';
 
-const PuzzleRoom = ({ title, description, correctPassword, hint1, hint2, successText }) => {
+const PuzzleRoom = ({ 
+  title, 
+  description, 
+  correctPassword, 
+  hint1, 
+  hint2, 
+  successText,
+  nextPuzzle // { piece, puzzleText, correctAnswer, nextRoute }
+}) => {
   const [answer, setAnswer] = useState('');
   const [message, setMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
@@ -10,8 +19,40 @@ const PuzzleRoom = ({ title, description, correctPassword, hint1, hint2, success
   const [showHint1, setShowHint1] = useState(false);
   const [showHint2, setShowHint2] = useState(false);
   const [timeElapsed, setTimeElapsed] = useState(0);
+  const [showNextAnswer, setShowNextAnswer] = useState(false);
+  const [code, setCode] = useState(['', '', '', '']);
+  const [codeMessage, setCodeMessage] = useState('');
+  const codeInputRefs = useRef([]);
+  const navigate = useNavigate();
+
+  // Chave única para cada sala baseada no título
+  const storageKey = `puzzle_timer_${title.replace(/\s+/g, '_').toLowerCase()}`;
 
   useEffect(() => {
+    // Carrega o tempo inicial do localStorage ou cria um novo
+    const savedStartTime = localStorage.getItem(storageKey);
+    let startTime;
+    
+    if (savedStartTime) {
+      // Calcula o tempo decorrido desde o início salvo
+      const elapsed = Math.floor((Date.now() - parseInt(savedStartTime)) / 1000);
+      startTime = elapsed;
+    } else {
+      // Primeira vez acessando esta sala, salva o tempo atual
+      startTime = 0;
+      localStorage.setItem(storageKey, Date.now().toString());
+    }
+
+    setTimeElapsed(startTime);
+
+    // Atualiza as dicas baseado no tempo inicial
+    if (startTime >= 120) {
+      setHint1Available(true);
+    }
+    if (startTime >= 360) {
+      setHint2Available(true);
+    }
+
     const timer = setInterval(() => {
       setTimeElapsed(prev => {
         const newTime = prev + 1;
@@ -31,7 +72,7 @@ const PuzzleRoom = ({ title, description, correctPassword, hint1, hint2, success
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [storageKey]);
 
   const handleCheck = () => {
     if (answer.toLowerCase().trim() === correctPassword.toLowerCase()) {
@@ -40,7 +81,62 @@ const PuzzleRoom = ({ title, description, correctPassword, hint1, hint2, success
     } else {
       setMessage('Resposta incorreta. Tente novamente!');
       setIsSuccess(false);
+      setAnswer(''); // Limpa o input quando a resposta está errada
       setTimeout(() => setMessage(''), 3000);
+    }
+  };
+
+  const handleShowNextAnswer = () => {
+    setShowNextAnswer(true);
+  };
+
+  const handleCodeChange = (index, value) => {
+    // Permite apenas números
+    if (value && !/^\d$/.test(value)) return;
+    
+    const newCode = [...code];
+    newCode[index] = value;
+    setCode(newCode);
+    setCodeMessage('');
+
+    // Move para o próximo input automaticamente
+    if (value && index < 3) {
+      codeInputRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleCodeKeyDown = (index, e) => {
+    // Volta para o input anterior ao pressionar Backspace
+    if (e.key === 'Backspace' && !code[index] && index > 0) {
+      codeInputRefs.current[index - 1]?.focus();
+    }
+  };
+
+  const handleCodePaste = (e) => {
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData('text').slice(0, 4);
+    if (/^\d+$/.test(pastedData)) {
+      const newCode = pastedData.split('').concat(['', '', '', '']).slice(0, 4);
+      setCode(newCode);
+      const nextIndex = Math.min(pastedData.length, 3);
+      codeInputRefs.current[nextIndex]?.focus();
+    }
+  };
+
+  const handleNextEnigma = () => {
+    const codeString = code.join('');
+    if (nextPuzzle && codeString === nextPuzzle.code) {
+      setCodeMessage('Correto! Redirecionando...');
+      setTimeout(() => {
+        navigate(nextPuzzle.nextRoute);
+      }, 1000);
+    } else {
+      setCodeMessage('Código incorreto. Tente novamente!');
+      setCode(['', '', '', '']);
+      setTimeout(() => {
+        codeInputRefs.current[0]?.focus();
+      }, 100);
+      setTimeout(() => setCodeMessage(''), 3000);
     }
   };
 
@@ -52,10 +148,21 @@ const PuzzleRoom = ({ title, description, correctPassword, hint1, hint2, success
     setShowHint2(true);
   };
 
+  const handleResetTimer = () => {
+    // Remove o timer salvo e reinicia
+    localStorage.removeItem(storageKey);
+    localStorage.setItem(storageKey, Date.now().toString());
+    setTimeElapsed(0);
+    setHint1Available(false);
+    setHint2Available(false);
+    setShowHint1(false);
+    setShowHint2(false);
+  };
+
   return (
     <div className="puzzle-room">
       <h1 className="puzzle-title">{title}</h1>
-      <p className="puzzle-description">{description}</p>
+      <div className="puzzle-description" dangerouslySetInnerHTML={{ __html: description }}></div>
       
       {!isSuccess ? (
         <>
@@ -68,10 +175,6 @@ const PuzzleRoom = ({ title, description, correctPassword, hint1, hint2, success
               placeholder="Digite sua resposta..."
               className="puzzle-input"
             />
-            <button onClick={handleCheck} className="puzzle-button">
-              Verificar
-            </button>
-          </div>
 
           {message && (
             <div className={`puzzle-message ${isSuccess ? 'success' : 'error'}`}>
@@ -79,20 +182,25 @@ const PuzzleRoom = ({ title, description, correctPassword, hint1, hint2, success
             </div>
           )}
 
+            <button onClick={handleCheck} className="puzzle-button">
+              Verificar
+            </button>
+          </div>
+
           <div className="hints-container">
             <button
               onClick={handleHint1}
               disabled={!hint1Available}
               className={`hint-button ${hint1Available ? 'enabled' : 'disabled'}`}
             >
-              Dica 1 {hint1Available ? '' : `(disponível em ${Math.max(0, 120 - timeElapsed)}s)`}
+              Dica 1 {hint1Available ? '' : `(${Math.max(0, 120 - timeElapsed)}s)`}
             </button>
             <button
               onClick={handleHint2}
               disabled={!hint2Available}
               className={`hint-button ${hint2Available ? 'enabled' : 'disabled'}`}
             >
-              Dica 2 {hint2Available ? '' : `(disponível em ${Math.max(0, 360 - timeElapsed)}s)`}
+              Dica 2 {hint2Available ? '' : `(${Math.max(0, 360 - timeElapsed)}s)`}
             </button>
           </div>
 
@@ -110,9 +218,68 @@ const PuzzleRoom = ({ title, description, correctPassword, hint1, hint2, success
         </>
       ) : (
         <div className="success-container">
-          <p className="success-text">{successText}</p>
+          <div className="success-text" dangerouslySetInnerHTML={{ __html: successText }}></div>
+          
+          {nextPuzzle && (
+            <div className="next-puzzle-container">
+              <div className="next-puzzle-enigma">
+                <p dangerouslySetInnerHTML={{ __html: nextPuzzle.puzzleText }}></p>
+              </div>
+              
+                <div>
+                  <div className="code-input-container">
+                    <label className="code-label">Digite o código de 4 dígitos:</label>
+                    <div className="code-inputs">
+                      {code.map((digit, index) => (
+                        <input
+                          key={index}
+                          ref={(el) => (codeInputRefs.current[index] = el)}
+                          type="text"
+                          inputMode="numeric"
+                          maxLength="1"
+                          value={digit}
+                          onChange={(e) => handleCodeChange(index, e.target.value)}
+                          onKeyDown={(e) => handleCodeKeyDown(index, e)}
+                          onPaste={handleCodePaste}
+                          className="code-input"
+                          autoFocus={index === 0}
+                        />
+                      ))}
+                    </div>
+                    {codeMessage && (
+                      <div className={`puzzle-message ${codeMessage.includes('Correto') ? 'success' : 'error'}`}>
+                        {codeMessage}
+                      </div>
+                    )}
+                  </div>
+                  
+                  <button onClick={handleNextEnigma} className="puzzle-button next-enigma-button">
+                    Ir para o próximo Enigma
+                  </button>
+
+                  <button onClick={handleShowNextAnswer} className="puzzle-button">
+                    Onde acho o código?
+                  </button>
+                </div>
+                {!showNextAnswer ? null : (
+                <div className="next-answer-display">
+                  <p className="next-answer-text">
+                    <strong>A resposta é: {nextPuzzle.correctAnswer}</strong>
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
+      
+      <button 
+        onClick={handleResetTimer} 
+        className="reset-timer-button"
+        title="Reiniciar timer das dicas"
+      >
+        ⏰
+      </button>
     </div>
   );
 };
