@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A Maldição do Silêncio</title>
+    <script>
+      // Solução para SPAs no GitHub Pages
+      // Redireciona todas as rotas para index.html para que o React Router funcione
+      (function() {
+        var path = window.location.pathname;
+        var search = window.location.search;
+        var hash = window.location.hash;
+        
+        // Se não for o próprio 404.html, redireciona para index.html mantendo a rota
+        if (path !== '/404.html') {
+          var newPath = '/index.html' + path + search + hash;
+          window.history.replaceState(null, null, newPath);
+          window.location.replace(newPath);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>
+      Você precisa habilitar JavaScript para executar este aplicativo.
+      <a href="/">Clique aqui para ir para a página inicial</a>
+    </noscript>
+  </body>
+</html>
+
