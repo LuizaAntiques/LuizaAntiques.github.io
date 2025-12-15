@@ -11,7 +11,7 @@ const Home = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const codeInputRefs = useRef([]);
   
-  const correctCode = "0000"; // Você pode alterar para o código correto
+  const correctCode = "2507"; // Você pode alterar para o código correto
 
   const handlePlayPause = () => {
     if (audioRef.current) {
