@@ -81,8 +81,19 @@ const PuzzleRoom = ({
 
   const handleCheck = () => {
     if (answer.toLowerCase().trim() === correctPassword.toLowerCase()) {
-      if (isFinalRoom && errorMessageOnSuccess) {
-        // Na sala final, mostra mensagem de erro (pegadinha)
+      // Se a resposta for "o enigma da porta foi revelado", vitória imediata
+      if (answer.toLowerCase().trim() === 'o enigma da porta foi revelado') {
+        if (isFinalRoom && onVictory && victoryMessage) {
+          setMessage('');
+          setIsSuccess(true);
+          setShowVictory(true);
+          onVictory();
+        } else {
+          setMessage('Correto! Você desbloqueou este enigma!');
+          setIsSuccess(true);
+        }
+      } else if (isFinalRoom && errorMessageOnSuccess) {
+        // Na sala final, mostra mensagem de erro (pegadinha) para outras respostas
         setMessage(errorMessageOnSuccess);
         setIsSuccess(false);
         setAnswer('');

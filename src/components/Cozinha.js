@@ -19,7 +19,7 @@ const Cozinha = () => {
       description="Busque o gigante da doçura matinal, o pacote que veste o rei branco do ártico.Não é o sabor o segredo, mas a aventura impressa em seu verso, uma busca sem descanso.No meio da multidão, muito mais que o Wally você vai encontrar. Com tinta invisível, a chave final te espera."
       correctPassword="revelado"
       hint1="Onde o Urso Polar anuncia o café da manhã, e a confusão de pessoas esconde o que uma luz específica revela?"
-      hint2="Esse não é Kellogg's, mas no jogo do verso é possivel ver a palavra invisível"
+      hint2="Esse não é Kellogg's, mas no jogo do verso é possivel ver a palavra invisível com a luz certa."
       successText={successText}
       nextPuzzle={nextPuzzle}
     />
