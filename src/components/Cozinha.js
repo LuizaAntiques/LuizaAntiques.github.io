@@ -7,9 +7,9 @@ const Cozinha = () => {
   Vocês já tem todas as peças que precisam. Sigam para a <strong>PORTA DE SAIDA</strong>.<br/><br/>`;
 
   const nextPuzzle = {
-    puzzleText: "Talvez esse seja o mais dificil, mas a jornada termina onde tudo começou, no seu alicerce.Não é uma palavra, nem um cálculo, mas o endereço que lhe pertence. Busque o código que garante a chegada da carta. É a sua identidade geográfica.",
-    correctAnswer: "CEP do endereço",
-    code: "37536050",
+    puzzleText: "Talvez esse seja o mais dificil, mas a jornada termina onde tudo começou, no seu alicerce. Não é uma palavra, nem um cálculo, mas o endereço que lhe pertence. Busque o código que garante a chegada da carta. É a sua identidade geográfica, mas só os primeiros 4 digitos.",
+    correctAnswer: "CEP do endereço 37...",
+    code: "3753",
     nextRoute: "/saida"
   };
 

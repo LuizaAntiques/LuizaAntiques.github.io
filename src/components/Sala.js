@@ -9,7 +9,7 @@ const Sala = () => {
   const nextPuzzle = {
     puzzleText: "Para acessar a próxima pista vocês devem encontrar o código no <strong>Velho Guardião</strong>: Aquele que o tempo não destrói e que carrega cicatrizes desde antes do seu dono chegar. Procure a marca da próxima pista na sua pele esfarrapada, talvez ela esteja em um braço, já que ele não tem pernas...<br/><br/><strong>Vão AGORA.</strong>",
     correctAnswer: "perneta",
-    code: "2507",
+    code: "2016",
     nextRoute: "/quarto-do-rafa"
   };
 
