@@ -7,7 +7,6 @@ const Sala = () => {
     Uma porta foi aberta. Sigam para o <strong>QUARTO DO RAFAEL</strong>.<br/><br/>`;
 
   const nextPuzzle = {
-    piece: "0",
     puzzleText: "Para acessar a próxima pista vocês devem encontrar o código no <strong>Velho Guardião</strong>: Aquele que o tempo não destrói e que carrega cicatrizes desde antes do seu dono chegar. Procure a marca da próxima pista na sua pele esfarrapada, talvez ela esteja em um braço, já que ele não tem pernas...<br/><br/><strong>Vão AGORA.</strong>",
     correctAnswer: "perneta",
     code: "2507",

@@ -9,7 +9,11 @@ const PuzzleRoom = ({
   hint1, 
   hint2, 
   successText,
-  nextPuzzle // { piece, puzzleText, correctAnswer, nextRoute }
+  nextPuzzle, // { piece, puzzleText, correctAnswer, nextRoute, code }
+  isFinalRoom = false, // Para a sala final (Saída)
+  errorMessageOnSuccess = null, // Mensagem de erro quando acertar o primeiro enigma
+  victoryMessage = null, // Mensagem de vitória quando acertar o código final
+  onVictory = null // Callback quando vencer (ao invés de navegar)
 }) => {
   const [answer, setAnswer] = useState('');
   const [message, setMessage] = useState('');
@@ -22,6 +26,7 @@ const PuzzleRoom = ({
   const [showNextAnswer, setShowNextAnswer] = useState(false);
   const [code, setCode] = useState(['', '', '', '']);
   const [codeMessage, setCodeMessage] = useState('');
+  const [showVictory, setShowVictory] = useState(false);
   const codeInputRefs = useRef([]);
   const navigate = useNavigate();
 
@@ -76,8 +81,16 @@ const PuzzleRoom = ({
 
   const handleCheck = () => {
     if (answer.toLowerCase().trim() === correctPassword.toLowerCase()) {
-      setMessage('Correto! Você desbloqueou este enigma!');
-      setIsSuccess(true);
+      if (isFinalRoom && errorMessageOnSuccess) {
+        // Na sala final, mostra mensagem de erro (pegadinha)
+        setMessage(errorMessageOnSuccess);
+        setIsSuccess(false);
+        setAnswer('');
+        setTimeout(() => setMessage(''), 5000);
+      } else {
+        setMessage('Correto! Você desbloqueou este enigma!');
+        setIsSuccess(true);
+      }
     } else {
       setMessage('Resposta incorreta. Tente novamente!');
       setIsSuccess(false);
@@ -126,10 +139,17 @@ const PuzzleRoom = ({
   const handleNextEnigma = () => {
     const codeString = code.join('');
     if (nextPuzzle && codeString === nextPuzzle.code) {
-      setCodeMessage('Correto! Redirecionando...');
-      setTimeout(() => {
-        navigate(nextPuzzle.nextRoute);
-      }, 1000);
+      if (isFinalRoom && onVictory) {
+        // Na sala final, mostra mensagem de vitória
+        setCodeMessage('');
+        setShowVictory(true);
+        onVictory();
+      } else {
+        setCodeMessage('Correto! Redirecionando...');
+        setTimeout(() => {
+          navigate(nextPuzzle.nextRoute);
+        }, 1000);
+      }
     } else {
       setCodeMessage('Código incorreto. Tente novamente!');
       setCode(['', '', '', '']);
@@ -216,6 +236,10 @@ const PuzzleRoom = ({
             </div>
           )}
         </>
+      ) : showVictory && victoryMessage ? (
+        <div className="victory-container">
+          <div className="victory-content" dangerouslySetInnerHTML={{ __html: victoryMessage }}></div>
+        </div>
       ) : (
         <div className="success-container">
           <div className="success-text" dangerouslySetInnerHTML={{ __html: successText }}></div>

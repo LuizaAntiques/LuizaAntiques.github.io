@@ -86,6 +86,13 @@ const Home = () => {
     }
   };
 
+  const handleModalClose = (e) => {
+    // Fecha o modal apenas se clicar no overlay (fora do conteúdo do modal)
+    if (e.target === e.currentTarget) {
+      setShowQRCode(false);
+    }
+  };
+
   return (
     <div className="home">
       {/* Elementos decorativos para atmosfera */}
@@ -163,10 +170,15 @@ const Home = () => {
           </button>
         </div>
 
-        {/* QR Code */}
+        {/* QR Code Modal */}
         {showQRCode && (
-          <div className="qr-code-container">
-            <img src={qrCodeImage} alt="QR Code" className="qr-code-image" />
+          <div className="qr-code-modal-overlay" onClick={handleModalClose}>
+            <div className="qr-code-modal-content" onClick={(e) => e.stopPropagation()}>
+              <h2 className="qr-code-modal-title">Boa Jornada!</h2>
+              <div className="qr-code-container">
+                <img src={qrCodeImage} alt="QR Code" className="qr-code-image" />
+              </div>
+            </div>
           </div>
         )}
 

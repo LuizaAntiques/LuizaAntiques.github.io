@@ -144,55 +144,57 @@ const Rules = () => {
 
   return (
     <div className="rules-page">
-      <div className="rules-container">
-        <h1 className="rules-main-title">💀 A Maldição do Silêncio: Regras de Sobrevivência</h1>
-        
-        <div className="rules-content">
-          <div className="section-header">
-            <span className="section-number">{currentSectionData.number}</span>
-            <h2 className="section-title">{currentSectionData.title}</h2>
-          </div>
+      <div className="rules-wrapper">
+        <button
+          onClick={handlePrevious}
+          disabled={isFirstSection}
+          className={`nav-arrow nav-arrow-left ${isFirstSection ? 'disabled' : ''}`}
+          aria-label="Seção anterior"
+        >
+          ←
+        </button>
 
-          {currentSectionData.content.subtitle && (
-            <p className="section-subtitle">{currentSectionData.content.subtitle}</p>
-          )}
-
-          <div className="section-items">
-            {currentSectionData.content.items.map((item, index) => (
-              <div key={index} className="section-item">
-                {item.label && <strong className="item-label">{item.label}</strong>}
-                <p className="item-text">{item.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="rules-navigation">
-          <button
-            onClick={handlePrevious}
-            disabled={isFirstSection}
-            className={`nav-button prev-button ${isFirstSection ? 'disabled' : ''}`}
-          >
-            ← Anterior
-          </button>
+        <div className="rules-container">
+          <h1 className="rules-main-title">💀 A Maldição do Silêncio: Regras de Sobrevivência</h1>
           
-          <span className="section-indicator">
-            {currentSection} / {sections.length}
-          </span>
+          <div className="rules-content">
+            <div className="section-header">
+              <span className="section-number">{currentSectionData.number}</span>
+              <h2 className="section-title">{currentSectionData.title}</h2>
+            </div>
 
-          {!isLastSection ? (
-            <button
-              onClick={handleNext}
-              className="nav-button next-button"
-            >
-              Próximo →
-            </button>
-          ) : (
-            <Link to="/home" className="nav-button next-button start-button">
-              Começar Jornada →
-            </Link>
-          )}
+            {currentSectionData.content.subtitle && (
+              <p className="section-subtitle">{currentSectionData.content.subtitle}</p>
+            )}
+
+            <div className="section-items">
+              {currentSectionData.content.items.map((item, index) => (
+                <div key={index} className="section-item">
+                  {item.label && <strong className="item-label">{item.label}</strong>}
+                  <p className="item-text">{item.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="section-indicator">
+            {currentSection} / {sections.length}
+          </div>
         </div>
+
+        {!isLastSection ? (
+          <button
+            onClick={handleNext}
+            className="nav-arrow nav-arrow-right"
+            aria-label="Próxima seção"
+          >
+            →
+          </button>
+        ) : (
+          <Link to="/home" className="nav-arrow nav-arrow-right start-arrow" aria-label="Começar jornada">
+            →
+          </Link>
+        )}
       </div>
     </div>
   );
