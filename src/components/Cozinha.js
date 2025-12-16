@@ -1,14 +1,14 @@
 import PuzzleRoom from './PuzzleRoom';
 
 const Cozinha = () => {
-  const successText = `Parabéns! A quinta pista foi encontrada.<br/><br/>
-  <strong>Sua quinta peça é: 6159</strong><br/><br/>
+  const successText = `Parabéns! A última pista foi encontrada.<br/><br/>
+  <strong>Sua sexta peça é: REVELADO</strong><br/><br/>
   A Criatura está perto, mas o caminho para a liberdade TAMBÉM. Mexam-se antes que seja tarde.<br/><br/>
   Vocês já tem todas as peças que precisam. Sigam para a <strong>PORTA DE SAIDA</strong>.<br/><br/>`;
 
   const nextPuzzle = {
-    puzzleText: "Talvez esse seja o mais dificil, mas a jornada termina onde tudo começou, no seu alicerce. Não é uma palavra, nem um cálculo, mas o endereço que lhe pertence. Busque o código que garante a chegada da carta. É a sua identidade geográfica, mas só os primeiros 4 digitos.",
-    correctAnswer: "CEP do endereço 37...",
+    puzzleText: "Talvez esse seja o mais dificil e algo no caminho posse te ajudar, mas a jornada termina onde tudo começou, no seu alicerce. Não é uma palavra, nem um cálculo, mas o endereço que lhe pertence. Busque o código que garante a chegada da carta. É a sua identidade geográfica, mas só os primeiros 4 digitos.",
+    correctAnswer: "CEP do endereço (37...)",
     code: "3753",
     nextRoute: "/saida"
   };

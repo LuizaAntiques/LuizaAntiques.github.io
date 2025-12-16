@@ -10,11 +10,13 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>A Maldição do Silêncio</title>
     <script>
-      // Redireciona para index.html para permitir que o React Router gerencie as rotas
+      // Ajusta o pathname antes do React Router processar
       var path = window.location.pathname;
-      var search = window.location.search;
-      var hash = window.location.hash;
-      window.location.replace('%PUBLIC_URL%/index.html' + path + search + hash);
+      if (path !== '/' && !path.startsWith('/index.html')) {
+        var search = window.location.search;
+        var hash = window.location.hash;
+        history.replaceState(null, '', path + search + hash);
+      }
     </script>
   </head>
   <body>

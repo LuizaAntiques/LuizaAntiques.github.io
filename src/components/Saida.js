@@ -31,7 +31,7 @@ const Saida = () => {
       title="Saída"
       description="A chave de toda a jornada nunca é um único isolado, mas sim, um conjunto de peças que se encaixam em um todo. Lembrem-se bem: Nem sempre números são apenas números. Vamos rapido, vocês estão quase lá!"
       correctPassword="o enigma da porta foi revelado"
-      hint1="Junte todas as peças que vocês tem e forme a chave, são 6 palavras, tudo em minusculo."
+      hint1="Junte todas as peças que vocês tem e forme a chave, são 6 palavras. Não esqueça dos espaços."
       hint2="Os numeros correspondem a letras, as vezes pela forma, mas em sua grande maioria pelo posição do alfabeto."
       successText="A porta parece estar trancada... Mas há algo mais. Um código final aguarda vocês."
       nextPuzzle={nextPuzzle}
