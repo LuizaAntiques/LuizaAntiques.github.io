@@ -134,6 +134,13 @@ const PuzzleRoom = ({
     if (e.key === 'Backspace' && !code[index] && index > 0) {
       codeInputRefs.current[index - 1]?.focus();
     }
+    // Ao pressionar Enter, verifica o código se todos os 4 dígitos estiverem preenchidos
+    if (e.key === 'Enter') {
+      const codeString = code.join('');
+      if (codeString.length === 4) {
+        handleNextEnigma();
+      }
+    }
   };
 
   const handleCodePaste = (e) => {
